@@ -14,6 +14,12 @@ module.exports = sendMail = async (text, file, to) => {
     to,
     subject: "Send mail from nodejs",
     text: text + file,
+    attachments: [
+      {
+        filename: "image.png",
+        path: __dirname + "/image.png",
+      },
+    ],
   };
 
   try {

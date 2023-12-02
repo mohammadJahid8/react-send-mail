@@ -39,7 +39,7 @@ const EmailForm = () => {
 
   return (
     <>
-      <form className="max-w-[500px] w-full mx-auto" onSubmit={onSubmit}>
+      <form className="max-w-[500px] w-full mx-auto px-8" onSubmit={onSubmit}>
         <div className="mb-5">
           <label
             htmlFor="email"

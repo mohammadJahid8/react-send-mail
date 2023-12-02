@@ -16,9 +16,6 @@ const upload = multer({ storage });
 async function main() {
   try {
     app.post("/send-mail", upload.single("file"), async (req, res) => {
-      console.log("file", req.file);
-      console.log("body", req.body);
-
       if (!req?.file?.path) {
         return res.status(500).json({
           success: false,

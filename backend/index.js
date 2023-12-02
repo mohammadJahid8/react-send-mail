@@ -27,7 +27,13 @@ async function main() {
         filename: req.file.originalname,
         path: req.file.path,
       };
-      const result = await sendMail(req.body.text, fileData, req.body.email);
+      const result = await sendMail(
+        req.body.name,
+        req.body.subject,
+        req.body.text,
+        fileData,
+        req.body.email
+      );
       if (!result)
         return res.status(500).json({
           success: false,

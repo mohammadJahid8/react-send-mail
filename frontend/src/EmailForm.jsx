@@ -13,7 +13,9 @@ const EmailForm = () => {
 
     const formdata = new FormData();
     formdata.append("file", entries.file);
+    formdata.append("name", entries.name);
     formdata.append("email", entries.email);
+    formdata.append("subject", entries.subject);
     formdata.append("text", entries.message);
 
     try {
@@ -40,6 +42,21 @@ const EmailForm = () => {
   return (
     <>
       <form className="max-w-[500px] w-full mx-auto px-8" onSubmit={onSubmit}>
+        <div className="mb-5">
+          <label
+            htmlFor="name"
+            className="block mb-2 text-sm font-medium text-gray-900 "
+          >
+            Your name
+          </label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5     "
+            required
+          />
+        </div>
         <div className="mb-5">
           <label
             htmlFor="email"
@@ -69,6 +86,22 @@ const EmailForm = () => {
             id="file"
             name="file"
             type="file"
+            required
+          />
+        </div>
+        <div className="mb-5">
+          <label
+            htmlFor="subject"
+            className="block mb-2 text-sm font-medium text-gray-900 "
+          >
+            Subject
+          </label>
+          <input
+            type="text"
+            id="subject"
+            name="subject"
+            className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5     "
+            placeholder="Your subject"
             required
           />
         </div>

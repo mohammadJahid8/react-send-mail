@@ -17,10 +17,13 @@ async function main() {
   try {
     app.post("/send-mail", upload.single("file"), async (req, res) => {
       console.log("file", req.file);
-      console.log("body", req.body.email);
+      console.log("body", req.body);
 
       if (!req?.file?.path) {
-        throw new Error("File not found!");
+        return res.status(500).json({
+          success: false,
+          message: "Something went wrong",
+        });
       }
 
       const fileData = {
@@ -28,8 +31,12 @@ async function main() {
         path: req.file.path,
       };
       const result = await sendMail(req.body.text, fileData, req.body.email);
-      if (!result) throw new Error("Mail was not sent!");
-      console.log(result);
+      if (!result)
+        return res.status(500).json({
+          success: false,
+          message: "Mail was not sent",
+        });
+
       res.status(200).json({
         success: true,
         message: "Mail sent successfully",
@@ -37,12 +44,12 @@ async function main() {
       });
     });
   } catch (err) {
-    res.status(200).json({
-      success: true,
+    console.log("Something went wrong", err);
+    res.status(500).json({
+      success: false,
       message: "Something went wrong",
       error: err?.message,
     });
-    console.log("Something went wrong", err);
   }
 }
 

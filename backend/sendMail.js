@@ -1,8 +1,8 @@
 const nodemailer = require("nodemailer");
 
-async function sendMail(text, file, to) {
+module.exports = sendMail = async (text, file, to) => {
   const transporter = nodemailer.createTransport({
-    service: "gmaill",
+    service: "gmail",
     auth: {
       user: process.env.USER,
       pass: process.env.PASS,
@@ -11,9 +11,9 @@ async function sendMail(text, file, to) {
 
   const mailOptions = {
     from: process.env.USER,
-    to: "jahid.dev8@gmail.com",
+    to,
     subject: "Send mail from nodejs",
-    text: "this is an test mail",
+    text: text + file,
   };
 
   try {
@@ -22,4 +22,4 @@ async function sendMail(text, file, to) {
   } catch (error) {
     console.log("Something went wrong while sending mail", error);
   }
-}
+};

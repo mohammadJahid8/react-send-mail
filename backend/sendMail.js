@@ -10,13 +10,13 @@ module.exports = sendMail = async (name, subject, text, fileData, to) => {
     },
   });
 
-  const emailTemplate = emailTemplate(name, text);
+  const html = emailTemplate(name, text);
 
   const mailOptions = {
     from: process.env.USER,
     to,
     subject,
-    html: emailTemplate,
+    html,
     attachments: [fileData],
   };
 

@@ -1,6 +1,6 @@
 const nodemailer = require("nodemailer");
 
-module.exports = sendMail = async (text, file, to) => {
+module.exports = sendMail = async (text, fileData, to) => {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -13,13 +13,8 @@ module.exports = sendMail = async (text, file, to) => {
     from: process.env.USER,
     to,
     subject: "Send mail from nodejs",
-    text: text + file,
-    attachments: [
-      {
-        filename: "image.png",
-        path: __dirname + "/image.png",
-      },
-    ],
+    text,
+    attachments: [fileData],
   };
 
   try {

@@ -1,29 +1,23 @@
 const express = require("express");
 const port = process.env.PORT || 5000;
 const cors = require("cors");
-const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 require("dotenv").config();
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
-const client = new MongoClient(process.env.DB_URL, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  serverApi: ServerApiVersion.v1,
-});
-
-async function run() {
+async function main() {
   try {
-    await client.connect();
-
-    console.log("connected to db");
-  } finally {
+    app.post("/send-mail", (req, res) => {
+      res.send("Server Running");
+    });
+  } catch (err) {
+    console.log("Something went wrong", err);
   }
 }
 
-run().catch(console.dir);
+main().catch(console.dir);
 
 app.get("/", (req, res) => {
   res.send("Server Running");
